@@ -10,5 +10,9 @@ import com.nttdata.models.Usuario;
 @Repository
 public interface UsuarioRepository extends CrudRepository<Usuario, Long>{
 
+	Usuario findByEmail(String email);
+
 	List<Usuario> findAll();
+
+    Usuario findByNombre(String nombre);
 }
