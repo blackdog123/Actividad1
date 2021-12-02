@@ -6,34 +6,30 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 @Entity
-@Table(name="productos")
-public class Producto {
-	@Id 
+@Table(name="carrito")
+public class Carrito {
+
+    @Id 
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Long id;
 	private String nombre;
-	private String marca;
-	private String tipo;
 	private String descripcion;
-	private int precio;
-
-	
-	public Producto() {
+    private int precio;
+    private int total;
+    
+    public Carrito() {
 		super();
 	}
 	
-	public Producto(String nombre, String descripcion, int precio, String marca, String tipo) {
+	public Carrito(String nombre, String descripcion, int precio, String marca, String tipo) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.precio = precio;
-		this.marca = marca;
-		this.tipo = tipo;
 	}
-	
-	public Long getId() {
+
+    public Long getId() {
 		return id;
 	}
 
@@ -66,19 +62,14 @@ public class Producto {
 	}
 
 
-	public String getMarca() {
-		return marca;
-	}
-	public void setMarca(String marca) {
-		this.marca = marca;
-	}
+    public int getTotal() {
+        return total;
+    }
 
-	public String getTipo() {
-		return tipo;
-	}
+    public void setTotal(int total) {
+        this.total = total;
+    }
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
+
+    
 }
-

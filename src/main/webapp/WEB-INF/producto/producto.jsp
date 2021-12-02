@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
@@ -19,10 +19,16 @@
 	<h1>Productos</h1>
 			<hr>
 	<h2>Crear Producto</h2>
-		<form:form method="post" action="/producto/login" modelAttribute="producto">
+		<form:form method="post" action="/producto/agregarProducto" modelAttribute="producto">
 			<input type="hidden" name="_method" value="put">
 			<form:label path="nombre" class="col-sm-2 col-form-label">Nombre:</form:label>
 			<form:input type="text" path="nombre" class="form-control"/>
+			<br>
+			<form:label path="marca" class="col-sm-2 col-form-label">Marca:</form:label>
+			<form:input type="text" path="marca" class="form-control"/>
+			<br>
+			<form:label path="tipo" class="col-sm-2 col-form-label">Tipo:</form:label>
+			<form:input type="text" path="tipo" class="form-control"/>
 			<br>
 			<form:label path="descripcion" class="col-sm-2 col-form-label">Descripcion:</form:label>
 			<form:input type="text" path="descripcion" class="form-control"/>
@@ -33,8 +39,8 @@
 			<a href="/usuario" class="btn btn-success" role="button" data-bs-toggle="button">Limpiar</a>
 			<input type="submit" class="btn btn-primary" value="Submit">
 
-		</form:form>
-	
+		</form:form>	
+		
 		<br>
 		<hr>
 		<h2>Tabla Productos</h2>
@@ -43,7 +49,7 @@
 		    <tr>
 		      <th scope="col">#</th>
 		      <th scope="col">Nombre</th>
-		      <th scope="col">Descripci�n</th>
+		      <th scope="col">Descripción</th>
 		      <th scope="col">Precio</th>
 		      <th scope="col-2">Acciones</th>
 		    </tr>

@@ -16,7 +16,9 @@ public class Venta {
 	private Long id;
 	private String nombreComprador;
 	private String fecha;
-	private int cantidad;	
+	private int cantidad;
+	
+	
 	
 	public Venta() {
 		super();

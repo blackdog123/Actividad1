@@ -1,5 +1,7 @@
 package com.nttdata.controllers;
+import java.security.Principal;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +32,6 @@ public class UsuarioController {
 	@Autowired
 	UsuarioService usuarioService;
 	
-
 	//desplegar inicialmente el jsp
 	@RequestMapping("")
 	public String usuario(@ModelAttribute("usuario") Usuario usuario,
@@ -40,23 +41,58 @@ public class UsuarioController {
 		model.addAttribute("listaUsuarios", usuarioService.obtenerListaUsuarios());
 		return "usuario/usuario.jsp";
 	}
-	
+
+		/*
+	http://localhost:8080/usuario/login
+	*/
 	//capturar la informacion del formulario
 	@RequestMapping("/login")
-	/*public String login(@RequestParam("nombre") String nombre,
-			@RequestParam("apellido") String apellido,
-			@RequestParam("limite") String limite,
-			@RequestParam("cp") String codigoPostal
-			) */
-	public String login(@Valid @ModelAttribute("usuario") Usuario usuario)
-	{
-		System.out.println(usuario.getNombre()+" "+usuario.getApellido()+" "+usuario.getLimite()+" "+usuario.getCodigoPostal());
-		//System.out.println(nombre+" "+apellido+" "+limite+" "+codigoPostal);
-		
-		usuarioService.insertarUsuario(usuario);
-		
-		return "redirect:/usuario";
+	public String login(Principal principal, Model model, HttpSession session) {
+		String nombre = principal.getName();
+
+		Usuario usuario = usuarioService.findByNombre(nombre);
+		model.addAttribute("nombre_usuario", usuario.getNombre());
+		return "home/home.jsp";
 	}
+	/*public String login(@RequestParam("email") String email,
+			@RequestParam("password") String password,
+			HttpSession session
+			) 
+	{
+		boolean resultado = usuarioService.loginUsuario(email,password);
+		if(resultado) {
+			Usuario usuario = usuarioService.findByEmail(email);
+			//almacenando variables de sessio0n
+			session.setAttribute("usuario_id", usuario.getId());
+			session.setAttribute("nombre_usuario", usuario.getNombre());
+
+			return "redirect:/";
+			
+		}else {
+			
+			return "redirect:/login";
+		}
+		
+	}
+	*/
+	
+	@RequestMapping("/crearCuenta")
+	public String registroUsuario(@Valid @ModelAttribute("usuario") Usuario usuario)
+	{
+		Usuario usuario2 = usuarioService.findByEmail(usuario.getEmail());
+		if(usuario2 != null) {
+
+			System.out.println("usuario existe");
+		}
+
+		else {
+			usuarioService.persistirUsuarioRol(usuario);
+		}
+		//retorno mensaje
+		
+		return "redirect:/login";
+	}
+	
 	
 	@RequestMapping("/eliminar")
 	public String eliminarUsuario(@RequestParam("id") Long id) {

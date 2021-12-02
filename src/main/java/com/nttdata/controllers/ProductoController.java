@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
 import com.nttdata.models.Producto;
 import com.nttdata.services.ProductoService;
 
@@ -30,11 +31,11 @@ public class ProductoController {
 		return "producto/producto.jsp";
 	}
 	
-	@RequestMapping("/login")
+	@RequestMapping("/agregarProducto")
 
-	public String login(@Valid @ModelAttribute("producto") Producto producto)
+	public String agregarProducto(@Valid @ModelAttribute ("producto") Producto producto )
 	{
-		System.out.println(producto.getNombre()+" "+producto.getDescripcion()+" "+producto.getPrecio());
+		System.out.println(producto.getNombre()+" "+ producto.getMarca()+" "+producto.getTipo()+" "+producto.getDescripcion()+" "+producto.getPrecio());
 	
 	
 		productoService.insertarProducto(producto);

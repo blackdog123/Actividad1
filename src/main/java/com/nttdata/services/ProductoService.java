@@ -26,11 +26,6 @@ public class ProductoService {
 		return  productoRepository.findAll();
 	}
 
-	public Producto buscarProductoId(Long id) {
-		
-		return productoRepository.findById(id).get();
-	}
-
 	public void eliminarProducto(Long id) {
 		productoRepository.deleteById(id);
 	}
@@ -40,13 +35,14 @@ public class ProductoService {
 		
 	}
 
+	public Producto buscarProductoId(Long id) {	
+		return productoRepository.findById(id).get();
+	}
+
 	public void updateProducto(@Valid Producto producto) {
 		if(productoRepository.existsById(producto.getId())){
 			productoRepository.save(producto);
 		}		
 	}
-	
-	
-
 
 }
