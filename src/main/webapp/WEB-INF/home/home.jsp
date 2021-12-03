@@ -49,8 +49,6 @@ pageEncoding="UTF-8"%>
     </div>
 	</div>
 
-  <p>hola ${nombre_usuario}</p>
-
   <div class="container" id="box_modal">
 
   <!-- Button trigger modal -->
